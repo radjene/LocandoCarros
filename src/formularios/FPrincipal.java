@@ -403,7 +403,6 @@ public class FPrincipal extends javax.swing.JFrame {
                     jTextField1.getText().trim(),
                     CarroDados.lstCarros,
                     false);
-                
                 this.carregarTabelaCarro(carrosTemp);
             }
             
@@ -551,27 +550,34 @@ public class FPrincipal extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    private void carregarTabelaCarro(List<Carro> listaCarro){
-        try{
-            DefaultTableModel modelo = (DefaultTableModel)tblCarro.getModel();
+    private void carregarTabelaCarro(List<Carro> listaCarro) {
+        try {
+            DefaultTableModel modelo = (DefaultTableModel) tblCarro.getModel();
             modelo.getDataVector().removeAllElements();
             
-            for (Carro carro : listaCarro) {
-            
-                SimpleDateFormat f = new SimpleDateFormat("yyyy");
-                
-                Vector v = new Vector();                
-                v.add(carro.getPlaca());
-                v.add(carro.getMarca()); 
-                v.add(carro.getModelo()); 
-                v.add(f.format(carro.getAno()));
-                v.add(Double.toString(carro.getValorDiariaLocacao()));
-                     
-                modelo.addRow(v);               
-            }
+            if (listaCarro.size() != 0) {
+                for (Carro carro : listaCarro) {
+
+                    SimpleDateFormat f = new SimpleDateFormat("yyyy");
+                    Vector v = new Vector();
+                    v.add(carro.getPlaca());
+                    v.add(carro.getMarca());
+                    v.add(carro.getModelo());
+                    v.add(f.format(carro.getAno()));
+                    v.add(Double.toString(carro.getValorDiariaLocacao()));
+
+                    modelo.addRow(v);
+                }
+            } 
+            else {
+                Vector v = new Vector();
+                v.add("Nenhum carro encontrado");
+                modelo.addRow(v);
+                //#TODO Descobrir com retonar o erro sem coluna
+           }
             tblCarro.repaint();
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(this, 
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this,
                     "Não foi possível carregar os carros.\n\n" + ex.getMessage(),
                     "Erro",
                     JOptionPane.ERROR_MESSAGE);

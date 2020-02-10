@@ -394,15 +394,16 @@ public class FPrincipal extends javax.swing.JFrame {
 
     private void buscarCarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarCarroActionPerformed
         
-            if(jTextField1.getText().trim().equals("")){
+        String carroPlaca = jTextField1.getText().trim();
+                    
+            if(carroPlaca.equals("")){
                 this.carregarTabelaCarro(CarroDados.lstCarros);
                 
             }else{
                 List<Carro> carrosTemp =
-                CarroDados.obterCarroPeloNomeParcial(
-                    jTextField1.getText().trim(),
-                    CarroDados.lstCarros,
-                    false);
+                CarroDados.obterCarroPeloNomeParcial(carroPlaca, 
+                        CarroDados.lstCarros,
+                        false);
                 this.carregarTabelaCarro(carrosTemp);
             }
             
@@ -444,6 +445,8 @@ public class FPrincipal extends javax.swing.JFrame {
         try{
 
             if(CarroDados.lstCarros.size() > 0){
+                //#TODO, NÃO ESTA ALTERANDO OU NÃO ESTA MOSTRANDO.
+                
                 Carro c = CarroDados.lstCarros.get(tblCarro.getSelectedRow());
                 if(c != null){
 
@@ -455,7 +458,6 @@ public class FPrincipal extends javax.swing.JFrame {
 
                     FCadCarro frmCadCarro = new FCadCarro(this, true);
                     Carro carro = frmCadCarro.execute(c);
-
                     this.carregarTabelaCarro(CarroDados.lstCarros);
                 }
             }
@@ -555,7 +557,7 @@ public class FPrincipal extends javax.swing.JFrame {
             DefaultTableModel modelo = (DefaultTableModel) tblCarro.getModel();
             modelo.getDataVector().removeAllElements();
             
-            if (listaCarro.size() != 0) {
+            if (!listaCarro.isEmpty()) {
                 for (Carro carro : listaCarro) {
 
                     SimpleDateFormat f = new SimpleDateFormat("yyyy");
@@ -567,15 +569,16 @@ public class FPrincipal extends javax.swing.JFrame {
                     v.add(Double.toString(carro.getValorDiariaLocacao()));
 
                     modelo.addRow(v);
+                    tblCarro.repaint();
                 }
             } 
             else {
-                Vector v = new Vector();
-                v.add("Nenhum carro encontrado");
-                modelo.addRow(v);
-                //#TODO Descobrir com retonar o erro sem coluna
-           }
-            tblCarro.repaint();
+                    JOptionPane.showMessageDialog(this, 
+                    "Não foi encontrado nenhum carro encontrado com a placa pesquisada",
+                    "Erro, nenhum carro encontrado",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this,
                     "Não foi possível carregar os carros.\n\n" + ex.getMessage(),
@@ -600,7 +603,7 @@ public class FPrincipal extends javax.swing.JFrame {
                 v.add(cliente.getCpfOuCnpj());
                 v.add(cliente.getCnhOuCnhr());
                 v.add(f.format(cliente.getDtNascimento()));
-                v.add(Double.toString(cliente.getDesconto()));
+//                v.add(Double.toString(cliente.getDesconto()));
                 
                 modelo.addRow(v);
                              

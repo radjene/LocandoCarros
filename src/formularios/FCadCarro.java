@@ -2,7 +2,7 @@ package formularios;
 
 import java.text.SimpleDateFormat;
 import classes.Carro;
-import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
+//import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import static java.lang.Double.parseDouble;
 import javax.swing.JOptionPane;
 
@@ -36,6 +36,7 @@ public class FCadCarro extends javax.swing.JDialog {
         txtAno.setText(f.format(c.getAno()));
         txtDiario.setText(Double.toString(c.getValorDiariaLocacao()));
         
+        //#TODO isso não deveria estar fazendo na lista de carroDados?
         this.setVisible(true);
         return this.carroTemp;
     }

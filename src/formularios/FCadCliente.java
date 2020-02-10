@@ -35,7 +35,7 @@ public class FCadCliente extends javax.swing.JDialog {
         txtCPFCNPJ.setText(p.getCpfOuCnpj());
         txtCNH.setText(p.getCnhOuCnhr());
         txtDtNasc.setText(f.format(p.getDtNascimento()));
-        txtDesconto.setText(Double.toString(p.getDesconto()));
+//        txtDesconto.setText(Double.toString(p.getDesconto()));
         
         if(p instanceof PessoaFisica){
             PessoaFisica x = (PessoaFisica)p;
@@ -58,6 +58,7 @@ public class FCadCliente extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         cancelarCliente = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
@@ -126,6 +127,7 @@ public class FCadCliente extends javax.swing.JDialog {
             }
         });
 
+        buttonGroup1.add(rdbPF);
         rdbPF.setSelected(true);
         rdbPF.setText("Pessoa Física");
         rdbPF.addActionListener(new java.awt.event.ActionListener() {
@@ -134,6 +136,7 @@ public class FCadCliente extends javax.swing.JDialog {
             }
         });
 
+        buttonGroup1.add(rdbPJ);
         rdbPJ.setText("Pessoa Jurídica");
         rdbPJ.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -240,35 +243,32 @@ public class FCadCliente extends javax.swing.JDialog {
 
     private void gravarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gravarClienteActionPerformed
 
-        try{
-            SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
-
-            Cliente cliente = null;
-            if(rdbPF.isSelected()){
-                if(this.alterar == true){
-                    cliente = this.clienteTemp;
-                }else{
-                    cliente = new PessoaFisica();
-                }
-
-                PessoaFisica x = (PessoaFisica)cliente;
-                x.setCpf(txtCPFCNPJ.getText());
-            }else if(rdbPJ.isSelected()){
-                if(this.alterar){
-                    cliente = this.clienteTemp;
-                }else{
-                    cliente = new PessoaJuridica();
-                }
-                ((PessoaJuridica)cliente).setCnpj(txtCPFCNPJ.getText());
-            }
-
-            cliente.setNome(txtNome.getText());
-            cliente.setEndereco(txtEndereco.getText());
-            cliente.setDtNascimento(f.parse(txtDtNasc.getText()));
-            cliente.setDesconto(Double.parseDouble(txtDesconto.getText()));
             
-
-            this.clienteTemp = cliente;
+        //#TODO resolver essa merda aqui e a das classes.
+        try{
+            String nome = txtNome.getText();
+            String endereco = txtEndereco.getText();
+            
+            SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
+            if (this.alterar == true) {
+                Cliente cliente = new Cliente();
+                cliente.setNome(nome);
+                cliente.setEndereco(endereco);
+            } else {
+                if (rdbPF.isSelected()){
+                    PessoaFisica cliente = new PessoaFisica();
+                    cliente.setNome(txtNome.getText());
+                    cliente.setEndereco(txtEndereco.getText());
+                    cliente.setDtNascimento(f.parse(txtDtNasc.getText()));
+                    
+                } else if (rdbPJ.isSelected()) {
+                    PessoaJuridica cliente = new PessoaJuridica();
+                    cliente.setNome(txtNome.getText());
+                    cliente.setEndereco(txtEndereco.getText());
+                    cliente.setDtNascimento(f.parse(txtDtNasc.getText()));
+                }
+            }
+//            this.clienteTemp = cliente;
             this.setVisible(false);
         }catch(Exception ex){
             JOptionPane.showMessageDialog(this,
@@ -346,6 +346,7 @@ public class FCadCliente extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton cancelarCliente;
     private javax.swing.JButton gravarCliente;
     private javax.swing.JLabel jLabel2;

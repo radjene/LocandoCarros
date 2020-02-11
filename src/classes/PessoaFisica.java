@@ -11,6 +11,8 @@ public class PessoaFisica extends Cliente {
         super();
     }
     
+    
+    
     /**
      * @return the cpf
      */

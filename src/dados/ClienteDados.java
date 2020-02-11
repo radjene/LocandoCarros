@@ -24,15 +24,21 @@ public class ClienteDados {
         List<Cliente> clientesTemp = new ArrayList<>();
         
         for (Cliente cliente : clientes) {
+            String nomeCliente = cliente.getNome();
+            System.out.println(cliente.getNome());
             //if(clientes.getNome().indexOf(nome) >= 0){
             if(caseSenstive){
-                if(cliente.getNome().contains(nome)){
+                if(nomeCliente.contains(nome)){
+                    System.out.println(cliente.getNome());
                     clientesTemp.add(cliente);
                 }
             }else{
-                if(cliente.getNome().toLowerCase().contains(nome.toLowerCase())){
+                if(nomeCliente.toLowerCase().contains(nome.toLowerCase())){
                     clientesTemp.add(cliente);
                 }
+//                else{
+//                    cliente.;
+//                }
             }
         }        
         

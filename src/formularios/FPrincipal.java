@@ -480,7 +480,18 @@ public class FPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_novoCarroActionPerformed
 
     private void buscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarClienteActionPerformed
-        
+            String nome =  jTextField2.getText().trim();
+            if(nome.equals("")){
+                this.carregarTabelaCliente(ClienteDados.lstClientes);
+                
+            }else{
+                List<Cliente> clientesTemp =
+                ClienteDados.obterPessoaPeloNomeParcial(nome,
+                    ClienteDados.lstClientes,
+                    false);
+                this.carregarTabelaCliente(clientesTemp);
+            }
+                    
     }//GEN-LAST:event_buscarClienteActionPerformed
 
     private void excluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirClienteActionPerformed
@@ -570,9 +581,7 @@ public class FPrincipal extends javax.swing.JFrame {
                 }
             } 
             else {
-                Vector v = new Vector();
-                v.add("Nenhum carro encontrado");
-                modelo.addRow(v);
+                JOptionPane.showMessageDialog(this, "Nenhum carro encontrado");
                 //#TODO Descobrir com retonar o erro sem coluna
            }
             tblCarro.repaint();
@@ -589,7 +598,7 @@ public class FPrincipal extends javax.swing.JFrame {
             DefaultTableModel modelo = (DefaultTableModel)tblCliente.getModel();
             modelo.getDataVector().removeAllElements();
             
-                       
+          if(listaCliente.size() != 0){             
             for (Cliente cliente : listaCliente) {
             
                 SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
@@ -603,10 +612,12 @@ public class FPrincipal extends javax.swing.JFrame {
                 v.add(Double.toString(cliente.getDesconto()));
                 
                 modelo.addRow(v);
-                             
             }
-            
-            tblCliente.repaint();            
+            tblCliente.repaint();   
+          }
+          else{
+              JOptionPane.showMessageDialog(this, "Nenhum cliente encontrado");
+          }
         }catch(Exception ex){
             JOptionPane.showMessageDialog(this, 
                     "Não foi possível carregar as pessoas.\n\n" + ex.getMessage(),

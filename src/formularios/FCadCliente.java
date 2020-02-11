@@ -3,6 +3,8 @@ package formularios;
 import classes.Cliente;
 import classes.PessoaFisica;
 import classes.PessoaJuridica;
+import java.sql.Date;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.text.DefaultFormatterFactory;
@@ -58,6 +60,7 @@ public class FCadCliente extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         cancelarCliente = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
@@ -101,6 +104,11 @@ public class FCadCliente extends javax.swing.JDialog {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtCPFCNPJ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCPFCNPJActionPerformed(evt);
+            }
+        });
 
         lblCNH.setText("CNH");
 
@@ -126,14 +134,21 @@ public class FCadCliente extends javax.swing.JDialog {
             }
         });
 
+        buttonGroup1.add(rdbPF);
         rdbPF.setSelected(true);
         rdbPF.setText("Pessoa Física");
+        try{
+            MaskFormatter mask = new MaskFormatter("###.###.###-##");
+            DefaultFormatterFactory dff = new DefaultFormatterFactory(mask);
+            txtCPFCNPJ.setFormatterFactory(dff);
+        }catch(Exception e){};
         rdbPF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rdbPFActionPerformed(evt);
             }
         });
 
+        buttonGroup1.add(rdbPJ);
         rdbPJ.setText("Pessoa Jurídica");
         rdbPJ.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -239,36 +254,37 @@ public class FCadCliente extends javax.swing.JDialog {
     }//GEN-LAST:event_txtDtNascActionPerformed
 
     private void gravarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gravarClienteActionPerformed
-
-        try{
-            SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
-
-            Cliente cliente = null;
-            if(rdbPF.isSelected()){
-                if(this.alterar == true){
-                    cliente = this.clienteTemp;
-                }else{
-                    cliente = new PessoaFisica();
-                }
-
-                PessoaFisica x = (PessoaFisica)cliente;
-                x.setCpf(txtCPFCNPJ.getText());
-            }else if(rdbPJ.isSelected()){
-                if(this.alterar){
-                    cliente = this.clienteTemp;
-                }else{
-                    cliente = new PessoaJuridica();
-                }
-                ((PessoaJuridica)cliente).setCnpj(txtCPFCNPJ.getText());
+        try{ 
+        String nome = txtNome.getText();
+        String Endereco = txtEndereco.getText();
+        String cpfOuCnpj = txtCPFCNPJ.getText();
+        String Cnh = txtCNH.getText();
+        Double descontoPj = Double.parseDouble(txtDesconto.getText());
+        if(this.alterar){
+                
             }
-
-            cliente.setNome(txtNome.getText());
-            cliente.setEndereco(txtEndereco.getText());
-            cliente.setDtNascimento(f.parse(txtDtNasc.getText()));
-            cliente.setDesconto(Double.parseDouble(txtDesconto.getText()));
-            
-
-            this.clienteTemp = cliente;
+            else{
+                if(rdbPF.isSelected()){
+                    PessoaFisica cliente = new PessoaFisica();
+                    java.util.Date dtNascimento = new SimpleDateFormat("dd/MM/yyyy").parse(txtDtNasc.getText());
+                    cliente.setNome(nome);
+                    cliente.setCpf(cpfOuCnpj);
+                    cliente.setEndereco(Endereco);
+                    cliente.setdtNascimento(dtNascimento);
+                    cliente.setCnh(Cnh);
+                    
+                    this.clienteTemp = cliente;
+                }
+                else if(rdbPJ.isSelected()){
+                    PessoaJuridica cliente = new PessoaJuridica();
+                    cliente.setNome(nome);
+                    cliente.setEndereco(Endereco);
+                    cliente.setCnpj(cpfOuCnpj);
+                    cliente.setCnhResponsavel(Cnh);
+                    cliente.setDesconto(descontoPj);
+                    this.clienteTemp = cliente;
+                }
+            }
             this.setVisible(false);
         }catch(Exception ex){
             JOptionPane.showMessageDialog(this,
@@ -302,6 +318,10 @@ public class FCadCliente extends javax.swing.JDialog {
         }catch(Exception ex){
         }
     }//GEN-LAST:event_rdbPJActionPerformed
+
+    private void txtCPFCNPJActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCPFCNPJActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCPFCNPJActionPerformed
 
     /**
      * @param args the command line arguments
@@ -346,6 +366,7 @@ public class FCadCliente extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton cancelarCliente;
     private javax.swing.JButton gravarCliente;
     private javax.swing.JLabel jLabel2;

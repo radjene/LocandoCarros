@@ -1,22 +1,20 @@
 package classes;
 
+import java.util.Date;
+
+/**
+ *
+ * @author matera
+ */
 public class PessoaJuridica extends Cliente {
     private String cnpj;
     private String cnhResponsavel;
-    private double descontoLocacao;
-    
-    
+    private double desconto;
 
-    @Override
-    public String getCpfOuCnpj() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public PessoaJuridica(){
+        super();
     }
-
-    @Override
-    public String getCnhOuCnhr() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    
     /**
      * @return the cnpj
      */
@@ -31,42 +29,37 @@ public class PessoaJuridica extends Cliente {
         this.cnpj = cnpj;
     }
 
-    /**
-     * @return the cnhResponsavel
-     */
-    public String getCnhResponsavel() {
-        return cnhResponsavel;
-    }
-
-    /**
-     * @param cnhResponsavel the cnhResponsavel to set
-     */
     public void setCnhResponsavel(String cnhResponsavel) {
         this.cnhResponsavel = cnhResponsavel;
     }
-
-    /**
-     * @return the descontoLocacao
-     */
-    public double getDescontoLocacao() {
-        return descontoLocacao;
-    }
-
-    /**
-     * @param descontoLocacao the descontoLocacao to set
-     */
-    public void setDescontoLocacao(double descontoLocacao) {
-        this.descontoLocacao = descontoLocacao;
-    }
-
-    @Override
-    public String CpfOuCnpj() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String CnhOuCnhr() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    
+    
+    public void setDesconto(double desconto){
+        this.desconto = desconto;
     }
     
+    @Override
+    public double getDesconto(){
+        return this.desconto;
+    }
+    
+    @Override
+    public String getCnhOuCnhr(){
+        return this.cnhResponsavel;
+    }
+
+    @Override
+    public String getCpfOuCnpj() {
+        return this.cnpj;
+    }
+
+    // só deus sabe o que acontece por essas terras
+    @Override
+    public Date getDtNascimento() {
+         Date date = new Date();
+         return date;
+    }
+
+
 }

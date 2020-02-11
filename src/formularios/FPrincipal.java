@@ -517,7 +517,7 @@ public class FPrincipal extends javax.swing.JFrame {
 
     private void novoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoClienteActionPerformed
        FCadCliente frmCadCliente = new FCadCliente(this, true);
-        Cliente p = frmCadCliente.execute();
+       Cliente p = frmCadCliente.execute();
         
         if(p != null){
             ClienteDados.lstClientes.add(p);

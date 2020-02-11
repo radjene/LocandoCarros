@@ -1,21 +1,19 @@
 package classes;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public abstract class Cliente {
     private String nome;
     private String endereco;
-    private Date dtNascimento;
-    private double desconto;
-    public abstract String CpfOuCnpj();
-    public abstract String CnhOuCnhr();
+    public abstract Date getDtNascimento();
+    public abstract double getDesconto();
+    public abstract String getCpfOuCnpj();
+    public abstract String getCnhOuCnhr();
 
     /**
      * @return the nome
      */
-    
-    
-    
     public String getNome() {
         return nome;
     }
@@ -41,41 +39,4 @@ public abstract class Cliente {
         this.endereco = endereco;
     }
 
-    /**
-     * @return the dtNascimento
-     */
-    public Date getDtNascimento() {
-        return dtNascimento;
-    }
-
-    /**
-     * @param dtNascimento the dtNascimento to set
-     */
-    public void setDtNascimento(Date dtNascimento) {
-        this.dtNascimento = dtNascimento;
-    }
-
-    /**
-     * @return the desconto
-     */
-    public double getDesconto() {
-        return desconto;
-    }
-
-    /**
-     * @param desconto the desconto to set
-     */
-    public void setDesconto(double desconto) {
-        this.desconto = desconto;
-    }
-
-    public String getCpfOuCnpj() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public String getCnhOuCnhr() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    
 }

@@ -6,19 +6,11 @@ public class PessoaFisica extends Cliente {
     private String cpf;
     private String cnh;
     private Date dtNascimento;
-    
-    
 
-    @Override
-    public String getCpfOuCnpj() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public PessoaFisica(){
+        super();
     }
-
-    @Override
-    public String getCnhOuCnhr() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    
     /**
      * @return the cpf
      */
@@ -29,48 +21,38 @@ public class PessoaFisica extends Cliente {
     /**
      * @param cpf the cpf to set
      */
+    
+    public void setdtNascimento(Date dtNascimento){
+        this.dtNascimento = dtNascimento;
+    }
+    
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
-    /**
-     * @return the cnh
-     */
-    public String getCnh() {
-        return cnh;
-    }
-
-    /**
-     * @param cnh the cnh to set
-     */
-    public void setCnh(String cnh) {
+    public void setCnh(String cnh){
         this.cnh = cnh;
     }
-
-    /**
-     * @return the dtNascimento
-     */
+    
     @Override
-    public Date getDtNascimento() {
-        return dtNascimento;
+    public Date getDtNascimento(){
+        return this.dtNascimento;
+    }
+    
+    @Override
+    public String getCnhOuCnhr(){
+        return this.cnh;
+    }
+    
+    @Override
+    public String getCpfOuCnpj() {
+        return this.cpf;
     }
 
-    /**
-     * @param dtNascimento the dtNascimento to set
-     */
+    // só deus sabe o que acontece por essas terras
     @Override
-    public void setDtNascimento(Date dtNascimento) {
-        this.dtNascimento = dtNascimento;
-    }
-
-    @Override
-    public String CpfOuCnpj() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String CnhOuCnhr() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public double getDesconto() {
+       return 0;
     }
     
     

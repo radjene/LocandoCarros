@@ -5,5 +5,13 @@
         <group name="NetBeansProjects">
             <file>file:/C:/Users/mabel/Documents/NetBeansProjects/LocandoCarros/src/formularios/FCadCarro.java</file>
         </group>
+        <group>
+            <file>file:/home/matera/Documents/ProjetosUnirio/LocandoCarros/src/formularios/FCadCarro.java</file>
+            <file>file:/home/matera/Documents/ProjetosUnirio/LocandoCarros/src/dados/CarroDados.java</file>
+            <file>file:/home/matera/Documents/ProjetosUnirio/LocandoCarros/src/dados/ClienteDados.java</file>
+            <file>file:/home/matera/Documents/ProjetosUnirio/LocandoCarros/src/formularios/FCadCliente.java</file>
+            <file>file:/home/matera/Documents/ProjetosUnirio/LocandoCarros/src/dados/LocacaoDados.java</file>
+            <file>file:/home/matera/Documents/ProjetosUnirio/LocandoCarros/src/formularios/FPrincipal.java</file>
+        </group>
     </open-files>
 </project-private>

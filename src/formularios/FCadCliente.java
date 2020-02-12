@@ -260,31 +260,40 @@ public class FCadCliente extends javax.swing.JDialog {
         String cpfOuCnpj = txtCPFCNPJ.getText();
         String Cnh = txtCNH.getText();
         Double descontoPj = Double.parseDouble(txtDesconto.getText());
-        if(this.alterar){
-                
-            }
-            else{
+        
+        
+                Cliente cliente = null;
                 if(rdbPF.isSelected()){
-                    PessoaFisica cliente = new PessoaFisica();
+                    if(!this.alterar){
+                        cliente = new PessoaFisica();
+                    }else{
+                         cliente = clienteTemp;
+                    }
+                    ((PessoaFisica)cliente).setCpf(cpfOuCnpj);
                     java.util.Date dtNascimento = new SimpleDateFormat("dd/MM/yyyy").parse(txtDtNasc.getText());
-                    cliente.setNome(nome);
-                    cliente.setCpf(cpfOuCnpj);
-                    cliente.setEndereco(Endereco);
-                    cliente.setdtNascimento(dtNascimento);
-                    cliente.setCnh(Cnh);
+                    ((PessoaFisica)cliente).setNome(nome);
+                    ((PessoaFisica)cliente).setCpf(cpfOuCnpj);
+                    ((PessoaFisica)cliente).setEndereco(Endereco);
+                    ((PessoaFisica)cliente).setdtNascimento(dtNascimento);
+                    ((PessoaFisica)cliente).setCnh(Cnh);
                     
                     this.clienteTemp = cliente;
                 }
                 else if(rdbPJ.isSelected()){
-                    PessoaJuridica cliente = new PessoaJuridica();
-                    cliente.setNome(nome);
-                    cliente.setEndereco(Endereco);
-                    cliente.setCnpj(cpfOuCnpj);
-                    cliente.setCnhResponsavel(Cnh);
-                    cliente.setDesconto(descontoPj);
+                    if(!this.alterar){
+                         cliente = new PessoaJuridica();
+                    }else{
+                         cliente = clienteTemp;
+                    }
+                    ((PessoaJuridica)cliente).setCnpj(txtCPFCNPJ.getText());
+                    ((PessoaJuridica)cliente).setNome(nome);
+                    ((PessoaJuridica)cliente).setEndereco(Endereco);
+                    ((PessoaJuridica)cliente).setCnpj(cpfOuCnpj);
+                    ((PessoaJuridica)cliente).setCnhResponsavel(Cnh);
+                    ((PessoaJuridica)cliente).setDesconto(descontoPj);
                     this.clienteTemp = cliente;
                 }
-            }
+            
             this.setVisible(false);
         }catch(Exception ex){
             JOptionPane.showMessageDialog(this,

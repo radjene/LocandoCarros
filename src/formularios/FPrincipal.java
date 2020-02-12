@@ -455,7 +455,8 @@ public class FPrincipal extends javax.swing.JFrame {
 
                     FCadCarro frmCadCarro = new FCadCarro(this, true);
                     Carro carro = frmCadCarro.execute(c);
-
+                    
+                    
                     this.carregarTabelaCarro(CarroDados.lstCarros);
                 }
             }
@@ -495,6 +496,33 @@ public class FPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_buscarClienteActionPerformed
 
     private void excluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirClienteActionPerformed
+        try{
+
+            if(ClienteDados.lstClientes.size() > 0){
+
+                String nome = tblCliente.
+                getValueAt(tblCliente.getSelectedRow(), 0).toString();
+
+                Cliente c = ClienteDados.obterPessoaPeloNomeExato(nome, ClienteDados.lstClientes);
+
+                if(c != null){
+
+                    if(JOptionPane.showConfirmDialog(this,
+                        "Deseja apagar " + c.getNome()+ "?",
+                        "Agenda",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
+                    ClienteDados.lstClientes.remove(c);
+                    this.carregarTabelaCliente(ClienteDados.lstClientes);
+                }
+            }
+        }
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(this,
+                "Não foi possível excluir o cliente.\n\n" + ex.getMessage(),
+                "Erro",
+                JOptionPane.ERROR_MESSAGE);
+        }
              
     }//GEN-LAST:event_excluirClienteActionPerformed
 
@@ -616,6 +644,7 @@ public class FPrincipal extends javax.swing.JFrame {
             tblCliente.repaint();   
           }
           else{
+              tblCliente.repaint();   
               JOptionPane.showMessageDialog(this, "Nenhum cliente encontrado");
           }
         }catch(Exception ex){

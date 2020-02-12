@@ -13,6 +13,8 @@ import javax.swing.JOptionPane;
 
 public class FCadCarro extends javax.swing.JDialog {
     private Carro carroTemp = null;
+    private boolean alterar = false;
+
 
     public FCadCarro(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -27,6 +29,7 @@ public class FCadCarro extends javax.swing.JDialog {
     
     public Carro execute(Carro c){
         this.carroTemp = c;
+        this.alterar = true;
         
         SimpleDateFormat f = new SimpleDateFormat("yyyy");
         
@@ -168,10 +171,15 @@ public class FCadCarro extends javax.swing.JDialog {
     private void gravarCarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gravarCarroActionPerformed
 
         try{
-            SimpleDateFormat f = new SimpleDateFormat("yyyy");
-
             Carro carro;
             carro = new Carro();
+            
+            if(alterar){ 
+            carro = carroTemp;    
+            }
+            SimpleDateFormat f = new SimpleDateFormat("yyyy");
+
+
 
             carro.setPlaca(txtPlaca.getText());
             carro.setMarca(txtMarca.getText());

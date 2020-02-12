@@ -5,10 +5,12 @@ import java.util.Date;
 public class Locacao {
     private String codigo;
     private Date dataLocacao;
-    private Date qtdeDiasLocado;
+    private Date dataEntrega;
+    private int qtdeDiasLocado;
     private double valorTotalLocacao;
-    //chamar carro e cliente
-
+    private String carro;
+    private String cliente;
+    
     /**
      * @return the codigo
      */
@@ -37,21 +39,7 @@ public class Locacao {
         this.dataLocacao = dataLocacao;
     }
 
-    /**
-     * @return the qtdeDiasLocado
-     */
-    public Date getQtdeDiasLocado() {
-        return qtdeDiasLocado;
-    }
-
-    /**
-     * @param qtdeDiasLocado the qtdeDiasLocado to set
-     */
-    public void setQtdeDiasLocado(Date qtdeDiasLocado) {
-        this.qtdeDiasLocado = qtdeDiasLocado;
-    }
-
-    /**
+     /**
      * @return the valorTotalLocacao
      */
     public double getValorTotalLocacao() {
@@ -63,6 +51,62 @@ public class Locacao {
      */
     public void setValorTotalLocacao(double valorTotalLocacao) {
         this.valorTotalLocacao = valorTotalLocacao;
+    }
+
+    /**
+     * @return the dataEntrega
+     */
+    public Date getDataEntrega() {
+        return dataEntrega;
+    }
+
+    /**
+     * @param dataEntrega the dataEntrega to set
+     */
+    public void setDataEntrega(Date dataEntrega) {
+        this.dataEntrega = dataEntrega;
+    }
+
+    /**
+     * @return the qtdeDiasLocado
+     */
+    public int getQtdeDiasLocado() {
+        return qtdeDiasLocado;
+    }
+
+    /**
+     * @param qtdeDiasLocado the qtdeDiasLocado to set
+     */
+    public void setQtdeDiasLocado(int qtdeDiasLocado) {
+        this.qtdeDiasLocado = qtdeDiasLocado;
+    }
+
+    /**
+     * @return the carro
+     */
+    public String getCarro() {
+        return carro;
+    }
+
+    /**
+     * @param carro the carro to set
+     */
+    public void setCarro(String carro) {
+        this.carro = carro;
+    }
+
+    /**
+     * @return the cliente
+     */
+    public String getCliente() {
+        return cliente;
+    }
+
+    /**
+     * @param cliente the cliente to set
+     */
+    public void setCliente(String cliente) {
+        this.cliente = cliente;
     }
     
     

@@ -2,7 +2,6 @@ package formularios;
 
 import java.text.SimpleDateFormat;
 import classes.Carro;
-import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import static java.lang.Double.parseDouble;
 import javax.swing.JOptionPane;
 

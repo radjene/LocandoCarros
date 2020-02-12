@@ -2,8 +2,10 @@ package formularios;
 
 import classes.Carro;
 import classes.Cliente;
+import classes.Locacao;
 import dados.CarroDados;
 import dados.ClienteDados;
+import dados.LocacaoDados;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Vector;
@@ -540,6 +542,13 @@ public class FPrincipal extends javax.swing.JFrame {
 
     private void novaLocacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novaLocacaoActionPerformed
         // TODO add your handling code here:
+        FCadLocacao frmCadLocacao = new FCadLocacao(this, true);
+        Locacao l = frmCadLocacao.execute();
+        
+        if(l != null){
+            LocacaoDados.lstLocacoes.add(l);
+            this.carregarTabelaLocacao(LocacaoDados.lstLocacoes);
+        }
     }//GEN-LAST:event_novaLocacaoActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -610,6 +619,38 @@ public class FPrincipal extends javax.swing.JFrame {
         }catch(Exception ex){
             JOptionPane.showMessageDialog(this, 
                     "Não foi possível carregar as pessoas.\n\n" + ex.getMessage(),
+                    "Erro",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private void carregarTabelaLocacao(List<Locacao> listaLocacao){
+        try{
+            DefaultTableModel modelo = (DefaultTableModel)tblLocacao.getModel();
+            modelo.getDataVector().removeAllElements();
+            
+                       
+            for (Locacao locacao : listaLocacao) {
+            
+                SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
+                
+                Vector v = new Vector();                
+                v.add(locacao.getCodigo());
+                v.add(f.format(locacao.getDataLocacao()));
+                v.add(f.format(locacao.getDataEntrega()));
+                v.add(Integer.toString(locacao.getQtdeDiasLocado()));
+                v.add(Double.toString(locacao.getValorTotalLocacao()));
+                v.add(locacao.getCarro());
+                v.add(locacao.getCliente());
+                
+                modelo.addRow(v);
+                             
+            }
+            
+            tblCliente.repaint();            
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(this, 
+                    "Não foi possível carregar as locacoes.\n\n" + ex.getMessage(),
                     "Erro",
                     JOptionPane.ERROR_MESSAGE);
         }
